@@ -1,7 +1,7 @@
 #!/bin/sh
-# TODO: Configure the remote host
-REMOTE_HOST=0.0.0.0
+REMOTE_HOST=51.210.191.243
 REMOTE_USER=ubuntu
+REMOTE_HOST_PUBLIC_KEY=archethic_cs1.pub
 
 # Prevent the node to sleep
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
@@ -20,6 +20,6 @@ ssh-copy-id $REMOTE_USER@$REMOTE_HOST
 ssh-add
 
 # Set SSL remote host public key as authorized key to connect and deploy code
-# TODO 
+cat $REMOTE_HOST_PUBLIC_KEY >> ~/.ssh/authorized_keys 
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 # TODO: Configure the remote host
-REMOTE_HOST=0.0.0.0
+REMOTE_HOST=51.210.191.243
 REMOTE_USER=ubuntu
 
 # Open SSH port with UPnP
