@@ -11,6 +11,6 @@ upnpc -a $LOCAL_IP 22 22 TCP
 PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
 
 # Send the IP
-echo "$PUBLIC_IP" | ssh -i nuc_key $REMOTE_USER@$REMOTE_HOST "cat >> ip_list | sort -u "
+echo "$PUBLIC_IP" | ssh -i nuc_key $REMOTE_USER@$REMOTE_HOST "cat >> ip_list"
 
 
