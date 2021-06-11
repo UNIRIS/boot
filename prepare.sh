@@ -8,13 +8,10 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 
 # Install tool to open UPnP
 sudo apt-get update
-sudo apt install miniupnpc
+sudo apt install miniupnpc -y
 
 # Generate key
 ssh-keygen
-
-# Send the public key
-ssh-copy-id $REMOTE_USER@$REMOTE_HOST
 
 # Add private key to the authentication agent
 ssh-add
