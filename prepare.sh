@@ -1,6 +1,4 @@
 #!/bin/sh
-REMOTE_HOST=51.210.191.243
-REMOTE_USER=ubuntu
 REMOTE_HOST_PUBLIC_KEY=archethic_cs1.pub
 
 # Prevent the node to sleep

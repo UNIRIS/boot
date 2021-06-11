@@ -1,8 +1,5 @@
 #!/bin/sh
 
-REMOTE_HOST=51.210.191.243
-REMOTE_USER=ubuntu
-
 # Open SSH port with UPnP
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 22 22 TCP
