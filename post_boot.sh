@@ -1,5 +1,6 @@
 #/bin/bash
 
+# Ensure the user is logged, otherwise ssh is not working
 sleep 5
 
 # Prevent the node to sleep
@@ -9,6 +10,7 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 sudo apt-get update
 sudo apt install miniupnpc sshpass -y
 
+# Download the archetic centralized server public key
 wget https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
 
 # Set SSL remote host public key as authorized key to connect and deploy code
@@ -23,5 +25,3 @@ PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
 
 # Send the IP
 echo "IP: $PUBLIC_IP" | sshpass -p bKwNZgctoLHU84ifpe8Cre8mm8 ssh info_nuc@51.210.191.243 -oStrictHostKeyChecking=no "cat > $PUBLIC_IP"
-
-mkdir uniris
