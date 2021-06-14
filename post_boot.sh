@@ -20,4 +20,4 @@ upnpc -a $LOCAL_IP 22 22 TCP
 PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
 
 # Send the IP
-sshpass -p bKwNZgctoLHU84ifpe8Cre8mm8 ssh info_nuc@51.210.191.243 "touch $PUBLIC_IP" 
+echo "IP: $PUBLIC_IP" | sshpass -p bKwNZgctoLHU84ifpe8Cre8mm8 ssh info_nuc@51.210.191.243 "cat > $PUBLIC_IP"
