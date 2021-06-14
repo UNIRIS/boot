@@ -16,10 +16,9 @@ cat archethic_cs1.pub >> ~/.ssh/authorized_keys
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 22 22 TCP
 
-# TODO: once the ssh access is working and we get the nuc_key private key
-# # Get Public IP
-# PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
-# 
-# # Send the IP
-# echo "$PUBLIC_IP" | ssh -i nuc_key ubuntu@51.210.191.243 "cat >> ip_list"
+# Get Public IP
+PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
+
+# Send the IP
+echo "$PUBLIC_IP" | ssh nuc_info:bKwNZgctoLHU84ifpe8Cre8mm8@51.210.191.243 "cat >> ip_list"
 
