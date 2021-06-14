@@ -1,4 +1,7 @@
-#!/bin/bash
+#
+/bin/bash
+
+sudo su
 
 # Prevent the node to sleep
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
