@@ -20,8 +20,5 @@ cat archethic_cs1.pub >> ~/.ssh/authorized_keys
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 22 22 TCP
 
-# Get Public IP
-PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
-
 # Send the IP
-echo "IP: $PUBLIC_IP" | sshpass -p bKwNZgctoLHU84ifpe8Cre8mm8 ssh info_nuc@51.210.191.243 -oStrictHostKeyChecking=no "cat > $PUBLIC_IP"
+curl -X POST 51.210.191.243:3000/publish_ip
