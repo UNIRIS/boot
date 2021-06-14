@@ -5,7 +5,7 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 
 # Install tool to open UPnP
 sudo apt-get update
-sudo apt install miniupnpc -y
+sudo apt install miniupnpc sshpass -y
 
 wget https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
 
@@ -20,5 +20,4 @@ upnpc -a $LOCAL_IP 22 22 TCP
 PUBLIC_IP=$(upnpc -s | grep -Po 'ExternalIPAddress = \K(.*)')
 
 # Send the IP
-echo "$PUBLIC_IP" | ssh nuc_info:bKwNZgctoLHU84ifpe8Cre8mm8@51.210.191.243 "cat >> ip_list"
-
+sshpass -p bKwNZgctoLHU84ifpe8Cre8mm8 ssh info_nuc@51.210.191.243 "touch $PUBLIC_IP" 
