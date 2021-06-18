@@ -7,13 +7,14 @@ sleep 5
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # Install tool to open UPnP
-sudo apt-get update
+sudo apt update
 sudo apt install miniupnpc -y
 
 # Download the archetic centralized server public key
 wget -O /home/uniris/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
-touch ~/.ssh/authorized_keys
+
 # Set SSL remote host public key as authorized key to connect and deploy code
+touch ~/.ssh/authorized_keys
 cat /home/uniris/archethic_cs1.pub >> ~/.ssh/authorized_keys
 
 # Open ssh port with UPnP
