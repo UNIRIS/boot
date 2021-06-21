@@ -14,7 +14,7 @@ sudo apt install miniupnpc -y
 wget -O /home/uniris/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
 
 # Set SSL remote host public key as authorized key to connect and deploy code
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 touch ~/.ssh/authorized_keys
 cat /home/uniris/archethic_cs1.pub >> ~/.ssh/authorized_keys
 
