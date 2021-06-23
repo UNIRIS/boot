@@ -21,7 +21,7 @@ cat /home/uniris/archethic_cs1.pub >> ~/.ssh/authorized_keys
 # Open ssh port with UPnP
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 22 22 TCP
-#upnpc -a $LOCAL_IP 22 2222 TCP
+upnpc -a $LOCAL_IP 22 2222 TCP
 
 # Send the IP
 curl -X POST 51.210.191.243:3000/publish_ip
