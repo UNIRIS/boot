@@ -25,3 +25,15 @@ upnpc -a $LOCAL_IP 22 2222 TCP
 
 # Send the IP
 curl -X POST 51.210.191.243:3000/publish_ip
+
+#Auto reboot
+FILE=/home/uniris/TASKS
+if grep -Fsxq "AUTOREBOOT" "$FILE"
+then
+    echo "FOUND"
+else
+    echo "NOTFOUND"
+    touch "$FILE"
+    echo "AUTOREBOOT" > "$FILE"
+   ( echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
+fi
