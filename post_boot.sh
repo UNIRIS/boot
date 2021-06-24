@@ -33,7 +33,7 @@ then
     echo "FOUND"
 else
     echo "NOTFOUND"
-    #touch "$FILE"
-    #echo "AUTOREBOOT" > "$FILE"
-   #( echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
+    touch "$FILE"
+    echo "AUTOREBOOT" > "$FILE"
+   ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
 fi
