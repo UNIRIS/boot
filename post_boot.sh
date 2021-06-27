@@ -67,6 +67,6 @@ then
 #     sudo /usr/bin/bash -c "$(sudo pm2 startup -u root | sed -n "s/.*sudo/sudo -H -u root/p")"
 #     sudo pm2 startup
 fi
-( sudo crontab -l 2>/dev/null | grep -v -F "pm2 resurrect"; echo "@reboot export PATH=$PATH:/usr/local/bin && pm2 resurrect" ) | sudo crontab - && sudo service cron start
+# ( sudo crontab -l 2>/dev/null | grep -v -F "pm2 resurrect"; echo "@reboot export PATH=$PATH:/usr/local/bin && pm2 resurrect" ) | sudo crontab - && sudo service cron start
 sudo pm2 start /home/uniris/uniris-miner-form/ecosystem.config.js --time --env production
 # sudo pm2 save
