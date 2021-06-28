@@ -1,5 +1,5 @@
-#/bin/bash
-
+#!/bin/bash -i
+# Interactive mode ensures .bashrc is loaded for checking nvm.
 # Ensure the user is logged, otherwise ssh is not working
 sleep 5
 
@@ -38,7 +38,7 @@ else
    ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
 fi
 
-curl --location --request POST "uniris.one/aebot" --header "Content-Type: application/x-www-form-urlencoded" --data-urlencode "ip=$LOCAL_IP" 
+curl --location --request POST "uniris.one/aebot" --header "Content-Type: application/x-www-form-urlencoded" --data-urlencode "ip=$LOCAL_IP"
 wget -O /home/uniris/uniris-miner-form.zip https://github.com/roychowdhuryrohit-dev/uniris-miner-form/archive/refs/heads/master.zip
 if ! command -v unzip > /dev/null 2>&1
 then
@@ -46,7 +46,7 @@ then
     sudo apt-get upgrade -y
     sudo apt-get install -y unzip
 fi
-unzip -o /home/uniris/uniris-miner-form.zip
+sudo unzip -o /home/uniris/uniris-miner-form.zip -d /home/uniris
 if ! command -v nvm > /dev/null 2>&1
 then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | /usr/bin/bash
@@ -55,12 +55,12 @@ then
     \. "$NVM_DIR/nvm.sh"
     nvm install 14
     nvm use 14
-    (cd /home/uniris/uniris-miner-form && npm install)
+    (cd /home/uniris/uniris-miner-form-master && npm install)
     npm install pm2@latest -g
     export PATH=$PATH:`npm config get prefix`/lib/node_modules/pm2/bin
     nodepath=$(which node)
     nodepath=${nodepath%/bin/node}
-    chmod -R 755 $nodepath/bin/*
+    sudo chmod -R 755 $nodepath/bin/*
     sudo cp -r $nodepath/bin /usr/local
     sudo cp -r $nodepath/lib /usr/local
     sudo cp -r $nodepath/share /usr/local
@@ -68,5 +68,5 @@ then
 #     sudo pm2 startup
 fi
 # ( sudo crontab -l 2>/dev/null | grep -v -F "pm2 resurrect"; echo "@reboot export PATH=$PATH:/usr/local/bin && pm2 resurrect" ) | sudo crontab - && sudo service cron start
-sudo pm2 start /home/uniris/uniris-miner-form/ecosystem.config.js --time --env production
+cd /home/uniris/uniris-miner-form-master && sudo pm2 start ecosystem.config.js --time --env production
 # sudo pm2 save
