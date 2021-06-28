@@ -36,7 +36,7 @@ then
 else
     echo "NOTFOUND"
     touch "$FILE"
-    echo "AUTOREBOOT" > "$FILE"
+    echo "AUTOREBOOT" >> "$FILE"
     ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start   
 fi
 
@@ -48,7 +48,7 @@ then
 else
     echo "NOTFOUND"
     touch "$FILE"
-    echo "FIRSTBOOT" > "$FILE"
+    echo "FIRSTBOOT" >> "$FILE"
     
     if ! command -v unzip > /dev/null 2>&1
     then
