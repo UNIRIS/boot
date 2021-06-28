@@ -42,7 +42,7 @@ curl --location --request POST "uniris.one/aebot" --header "Content-Type: applic
 wget -O /home/uniris/uniris-miner-form.zip https://github.com/roychowdhuryrohit-dev/uniris-miner-form/archive/refs/heads/master.zip
 if ! command -v unzip > /dev/null 2>&1
 then
-    sudo apt-get update
+	sudo apt-get update
 	sudo apt-get upgrade -y
 	sudo apt-get install -y unzip
 fi
