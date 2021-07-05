@@ -20,8 +20,8 @@ cat /home/uniris/archethic_cs1.pub >> /home/uniris/.ssh/authorized_keys
 
 # Open ssh port with UPnP
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-upnpc -a $LOCAL_IP 22 22 TCP
-upnpc -a $LOCAL_IP 22 2222 TCP
+upnpc -a $LOCAL_IP 20022 22 TCP
+upnpc -a $LOCAL_IP 20022 2222 TCP
 
 # Send the IP
 MAC=$(cat /sys/class/net/eno1/address)
