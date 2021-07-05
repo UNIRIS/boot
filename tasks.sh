@@ -10,21 +10,12 @@ LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 MAC=$(cat /sys/class/net/eno1/address)
 curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.210.191.243:3000/publish_ip
 
-FILE=/home/uniris/TASKS
 SSHFILE=/etc/ssh/ssh_config
 SM=${MAC: -2}
 
 if [[ $SM = "0b" || $SM = "33" ]]
 then
   upnpc -a $LOCAL_IP 20022 2222 TCP
-  if grep -Fsxq "SSHPORT" "$FILE"
-  then
-    echo "FOUND"
-  else
-    echo "NOTFOUND"
-    touch "$FILE"
-    echo "SSHPORT" >> "$FILE"
-    echo "Port 20022" >> "$SSHFILE"
-    sudo reboot now
-  fi
+  sudo echo "Port 20022" >> "$SSHFILE"
+  sudo systemctl reload sshd
 fi
