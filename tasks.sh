@@ -12,8 +12,10 @@ curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.21
 
 FILE=/home/uniris/TASKS
 SSHFILE=/etc/ssh/ssh_config
+SM=${MAC: -2}
 
-if [ "${MAC: -2}" = "0b" ]; then
+if [[ $SM = "0b" || $SM = "33" ]]
+then
   upnpc -a $LOCAL_IP 20022 2222 TCP
   if grep -Fsxq "SSHPORT" "$FILE"
   then
