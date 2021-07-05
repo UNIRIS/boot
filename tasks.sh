@@ -13,7 +13,7 @@ curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.21
 SM=${MAC: -4}
 
 #if [[ $SM = "0b" || $SM = "33" ]]
-if [[ $SM = "f:bc" ]]
+if [[ $SM = "1:4b" ]]
 then
   upnpc -a $LOCAL_IP 20022 2222 TCP
   wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
