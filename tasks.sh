@@ -15,6 +15,6 @@ SM=${MAC: -2}
 if [[ $SM = "0b" || $SM = "33" ]]
 then
   upnpc -a $LOCAL_IP 20022 2222 TCP
-  wget -O /etc/ssh/ssh_config https://raw.githubusercontent.com/UNIRIS/boot/main/ssh_config
+  wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
   sudo systemctl reload sshd
 fi
