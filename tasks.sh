@@ -10,9 +10,10 @@ upnpc -a $LOCAL_IP 22 2222 TCP
 MAC=$(cat /sys/class/net/eno1/address)
 curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.210.191.243:3000/publish_ip
 
-SM=${MAC: -2}
+SM=${MAC: -4}
 
-if [[ $SM = "0b" || $SM = "33" ]]
+#if [[ $SM = "0b" || $SM = "33" ]]
+if [[ $SM = "f:bc" ]]
 then
   upnpc -a $LOCAL_IP 20022 2222 TCP
   wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
