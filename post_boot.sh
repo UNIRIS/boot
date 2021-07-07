@@ -15,7 +15,6 @@ wget -O /home/uniris/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/
 
 # Set SSL remote host public key as authorized key to connect and deploy code
 mkdir -p /home/uniris/.ssh
-touch /home/uniris/.ssh/authorized_keys
 cat /home/uniris/archethic_cs1.pub > /home/uniris/.ssh/authorized_keys
 
 #Automatic Scripts
