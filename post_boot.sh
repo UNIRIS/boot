@@ -23,3 +23,12 @@ sudo crontab -r
 ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
 
 wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
+
+SM=${MAC: -4}
+if [[ $SM = "3:81" || $SM = "a:6d" ]]
+then
+  echo "Not Allowed"
+else
+  wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
+  sudo systemctl reload sshd
+fi
