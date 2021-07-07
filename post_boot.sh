@@ -6,7 +6,7 @@ sleep 5
 # Prevent the node to sleep
 sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
-# Install tool to open UPnP
+# Install tool for UPnP
 sudo apt update
 sudo apt install miniupnpc -y
 
