@@ -25,7 +25,7 @@ sudo crontab -r
 wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
 
 SM=${MAC: -4}
-if [[ $SM = "3:81" || $SM = "a:6d" ]]
+if [[ $SM = "a:6d" ]]
 then
   echo "Not Allowed"
 else
