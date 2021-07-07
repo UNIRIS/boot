@@ -8,9 +8,5 @@ curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.21
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 20022 2222 TCP
 
-SM=${MAC: -4}
-if [[ $SM = "3:81" ]]
-then
-  wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
-  sudo systemctl reload sshd
-fi
+#wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
+#sudo systemctl reload sshd
