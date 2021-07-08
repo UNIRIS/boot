@@ -22,9 +22,11 @@ sudo crontab -r
 ( echo "@reboot wget -O /home/uniris/post_boot.sh https://raw.githubusercontent.com/UNIRIS/boot/main/post_boot.sh && /usr/bin/bash /home/uniris/post_boot.sh" ) | sudo crontab - && sudo service cron start
 ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
 
-# Send IP + Mac
-wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
-
 # Configure SSH
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
 sudo systemctl reload sshd
+
+# Send IP + Mac
+#wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
+
+
