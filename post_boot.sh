@@ -17,18 +17,14 @@ wget -O /home/uniris/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/
 mkdir -p /home/uniris/.ssh
 cat /home/uniris/archethic_cs1.pub > /home/uniris/.ssh/authorized_keys
 
-#Automatic Scripts
+# Automatic Scripts
 sudo crontab -r
 ( echo "@reboot wget -O /home/uniris/post_boot.sh https://raw.githubusercontent.com/UNIRIS/boot/main/post_boot.sh && /usr/bin/bash /home/uniris/post_boot.sh" ) | sudo crontab - && sudo service cron start
 ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
 
+# Send IP + Mac
 wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
 
-SM=${MAC: -4}
-if [[ $SM = "a:6d" ]]
-then
-  echo "Not Allowed"
-else
-  wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
-  sudo systemctl reload sshd
-fi
+# Configure SSH
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
+sudo systemctl reload sshd
