@@ -28,5 +28,3 @@ sudo systemctl reload sshd
 
 # Send IP + Mac
 #wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
-
-
