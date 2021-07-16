@@ -10,3 +10,7 @@ curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.21
 # Open SSH port with UPnP
 LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
 upnpc -a $LOCAL_IP 20022 2222 TCP
+
+# Configure SSH
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
+sudo systemctl reload sshd
