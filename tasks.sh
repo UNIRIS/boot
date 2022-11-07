@@ -21,10 +21,28 @@
 #wget -O /home/uniris/logs.txt https://iplogger.org/2zh7h6
 
 # Get last version of miniupnpc
+sudo apt update
+sudo apt install build-essential -y
+
 wget -O ~/miniupnpc-2.2.4.tar.gz "http://miniupnp.free.fr/files/miniupnpc-2.2.4.tar.gz"
 tar -xvf miniupnpc-2.2.4.tar.gz
 cd ~/miniupnpc-2.2.4
 sudo make install
+
+# Update iptables
+sudo apt install ipset -y
+
+sudo ipset create upnp hash:ip,port timeout 3
+sudo iptables -A OUTPUT -d 239.255.255.250/32 -p udp -m udp --dport 1900 -j SET --add-set upnp src,src --exist
+sudo iptables -A INPUT -p udp -m set --match-set upnp dst,dst -j ACCEPT
+sudo iptables -A INPUT -d 239.255.255.250/32 -p udp -m udp --dport 1900 -j ACCEPT
+
+sudo ipset create upnp6 hash:ip,port timeout 3 family inet6
+sudo ip6tables -A OUTPUT -d ff02::c/128 -p udp -m udp --dport 1900 -j SET --add-set upnp6 src,src --exist
+sudo ip6tables -A OUTPUT -d ff05::c/128 -p udp -m udp --dport 1900 -j SET --add-set upnp6 src,src --exist
+sudo ip6tables -A INPUT -p udp -m set --match-set upnp6 dst,dst -j ACCEPT
+sudo ip6tables -A INPUT -d ff02::c/128 -p udp -m udp --dport 1900 -j ACCEPT
+sudo ip6tables -A INPUT -d ff05::c/128 -p udp -m udp --dport 1900 -j ACCEPT
 
 # Send the IP + MAC
 UPNPC_RES=$(upnpc -l)
