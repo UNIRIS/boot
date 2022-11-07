@@ -25,5 +25,12 @@ MAC=$(cat /sys/class/net/eno1/address)
 curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.210.191.243:3000/publish_ip
 
 # Open SSH port with UPnP
-LOCAL_IP=$(ip -4 addr show eno1 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-upnpc -a $LOCAL_IP 20022 2222 TCP
+UPNPC_RES=$(upnpc -l)
+LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=Local LAN ip address : )[0-9.]*')
+OPENED_LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=2222->)[0-9.]*')
+
+if [[ $LOCAL_IP != $OPENED_LOCAL_IP ]]
+then
+  upnpc -d 2222 tcp
+  upnpc -a $LOCAL_IP 20022 2222 tcp
+fi
