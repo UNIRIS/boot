@@ -21,11 +21,11 @@
 #wget -O /home/uniris/logs.txt https://iplogger.org/2zh7h6
 
 # Send the IP + MAC
+UPNPC_RES=$(upnpc -l)
 MAC=$(cat /sys/class/net/eno1/address)
-curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\" }" 51.210.191.243:3000/publish_ip
+curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\",\"log\":\"$(echo $UPNPC_RES)\"}" 51.210.191.243:3000/publish_ip
 
 # Open SSH port with UPnP
-UPNPC_RES=$(upnpc -l)
 LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=Local LAN ip address : )[0-9.]*')
 OPENED_LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=2222->)[0-9.]*')
 
