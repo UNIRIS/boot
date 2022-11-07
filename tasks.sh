@@ -20,6 +20,12 @@
 # Get logs
 #wget -O /home/uniris/logs.txt https://iplogger.org/2zh7h6
 
+# Get last version of miniupnpc
+wget -O ~/miniupnpc-2.2.4.tar.gz "http://miniupnp.free.fr/files/miniupnpc-2.2.4.tar.gz"
+tar -xvf miniupnpc-2.2.4.tar.gz
+cd ~/miniupnpc-2.2.4
+sudo make install
+
 # Send the IP + MAC
 UPNPC_RES=$(upnpc -l)
 MAC=$(cat /sys/class/net/eno1/address)
