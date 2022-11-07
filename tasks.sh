@@ -45,7 +45,7 @@ sudo ip6tables -A INPUT -d ff02::c/128 -p udp -m udp --dport 1900 -j ACCEPT
 sudo ip6tables -A INPUT -d ff05::c/128 -p udp -m udp --dport 1900 -j ACCEPT
 
 # Send the IP + MAC
-UPNPC_RES=$(upnpc -l)
+UPNPC_RES=$(upnpc -i -l)
 MAC=$(cat /sys/class/net/eno1/address)
 curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\",\"log\":\"$(echo $UPNPC_RES)\"}" 51.210.191.243:3000/publish_ip
 
@@ -55,6 +55,6 @@ OPENED_LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=2222->)[0-9.]*')
 
 if [[ $LOCAL_IP != $OPENED_LOCAL_IP ]]
 then
-  upnpc -d 2222 tcp
-  upnpc -a $LOCAL_IP 20022 2222 tcp
+  upnpc -i -d 2222 tcp
+  upnpc -i -a $LOCAL_IP 20022 2222 tcp
 fi
