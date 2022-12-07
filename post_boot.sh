@@ -27,21 +27,23 @@ sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.ta
 sudo apt update
 sudo apt install miniupnpc -y
 
+USER=$(whoami)
+
 # Download the archetic centralized server public key
-wget -O /home/uniris/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
+wget -O /home/$USER/archethic_cs1.pub https://raw.githubusercontent.com/UNIRIS/boot/main/archethic_cs1.pub
 
 # Set SSL remote host public key as authorized key to connect and deploy code
-mkdir -p /home/uniris/.ssh
-cat /home/uniris/archethic_cs1.pub > /home/uniris/.ssh/authorized_keys
+mkdir -p /home/$USER/.ssh
+cat /home/$USER/archethic_cs1.pub > /home/$USER/.ssh/authorized_keys
 
 # Automatic Scripts
 sudo crontab -r
-( echo "@reboot wget -O /home/uniris/post_boot.sh https://raw.githubusercontent.com/UNIRIS/boot/main/post_boot.sh && /usr/bin/bash /home/uniris/post_boot.sh" ) | sudo crontab - && sudo service cron start
-( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh" ) | sudo crontab - && sudo service cron start
+( echo "@reboot wget -O /home/$USER/post_boot.sh https://raw.githubusercontent.com/UNIRIS/boot/main/post_boot.sh && /usr/bin/bash /home/$USER/post_boot.sh" ) | sudo crontab - && sudo service cron start
+( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/$USER/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/$USER/tasks.sh" ) | sudo crontab - && sudo service cron start
 
 # Configure SSH
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
 sudo systemctl reload sshd
 
 # Send IP + Mac
-wget -O /home/uniris/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/uniris/tasks.sh
+wget -O /home/$USER/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/$USER/tasks.sh
