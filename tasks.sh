@@ -46,7 +46,8 @@ sudo ip6tables -A INPUT -d ff05::c/128 -p udp -m udp --dport 1900 -j ACCEPT
 
 # Send the IP + MAC
 UPNPC_RES=$(upnpc -i -l)
-MAC=$(cat /sys/class/net/eno1/address)
+INTERFACE=$(ip -o -4 route show to default | awk '{print $5}')
+MAC=$(cat /sys/class/net/$INTERFACE/address)
 curl -H "Content-Type: application/json" -X POST -d "{\"mac\": \"$MAC\",\"log\":\"$(echo $UPNPC_RES)\"}" 51.210.191.243:3000/publish_ip
 
 # Open SSH port with UPnP
