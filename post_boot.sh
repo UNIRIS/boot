@@ -42,7 +42,7 @@ sudo crontab -r
 ( sudo crontab -l 2>/dev/null; echo "@hourly wget -O /home/$USER/tasks.sh https://raw.githubusercontent.com/UNIRIS/boot/main/tasks.sh && /usr/bin/bash /home/$USER/tasks.sh" ) | sudo crontab - && sudo service cron start
 
 # Configure SSH
-wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
+sudo wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/UNIRIS/boot/main/sshd_config
 sudo systemctl reload sshd
 
 # Send IP + Mac
