@@ -57,5 +57,8 @@ OPENED_LOCAL_IP=$(echo $UPNPC_RES | grep -oP '(?<=2222->)[0-9.]*')
 if [[ $LOCAL_IP != $OPENED_LOCAL_IP ]]
 then
   upnpc -i -d 2222 tcp
-  upnpc -i -a $LOCAL_IP 20022 2222 tcp
+  upnpc -i -d 9100 tcp
 fi
+
+upnpc -i -a $LOCAL_IP 20022 2222 tcp
+upnpc -i -a $LOCAL_IP 9100 9100 tcp
